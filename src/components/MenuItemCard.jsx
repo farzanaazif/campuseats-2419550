@@ -1,22 +1,29 @@
-function MenuItemCard() {
-  const item = {
-    name: 'Nasi Ayam Gepuk',
-    description: 'White rice, fried chicken, sambal, cabbages and cucumbers',
-    price: 6.00,
-    available: true,
-  }
- 
+import { useState } from 'react';
+
+function MenuItemCard({ item, onAdd }) {
+  const [isFavourite, setIsFavourite] = useState(false);
+
   return (
-    <article className="card menu-card">
-      <div className="thumb" aria-hidden="true">{item.name.charAt(0)}</div>
-      <h3>{item.name}</h3>
-      <p className="muted">{item.description}</p>
-      <p className="price">RM {item.price.toFixed(2)}</p>
-      <button className="btn" disabled={!item.available}>
-        {item.available ? 'Add to cart' : 'Sold out'}
-      </button>
-    </article>
-  )
+    <div className="menu-card">
+      {/* This takes the first letter of 'Rice', 'Noodles', or 'Drinks' */}
+      <div className="menu-icon">{item.category.charAt(0).toUpperCase()}</div>
+      
+      <div className="menu-info">
+        <span className="category-label">{item.category}</span>
+        <h4>{item.name}</h4>
+        <p>{item.description}</p>
+        <p><strong>RM {item.price.toFixed(2)}</strong></p>
+      </div>
+
+      <div className="menu-actions">
+        <button className="btn-add" onClick={() => onAdd(item)}>Add to cart</button>
+        
+        {/* The B5 Feature: Heart Button */}
+        <button className="btn-heart" onClick={() => setIsFavourite(!isFavourite)}>
+          {isFavourite ? '♥' : '♡'}
+        </button>
+      </div>
+    </div>
+  );
 }
- 
-export default MenuItemCard
+export default MenuItemCard;

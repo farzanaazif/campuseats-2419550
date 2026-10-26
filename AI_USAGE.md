@@ -13,7 +13,7 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - One thing the AI got wrong and how I fixed it:-
 
 ## Week 2
-- Tool(s):
-- What I asked for:
-- What I kept, changed or rejected, and why:
-- One thing the AI got wrong and how I fixed it:
+- Tool(s): Deepseek
+- What I asked for: I asked the AI to help me creating the components to use props, manage state for the cart and selected vendor, and implement my personal feature.
+- What I kept, changed or rejected, and why:I kept the cart logic but changed the component names. 
+- One thing the AI got wrong and how I fixed it: -

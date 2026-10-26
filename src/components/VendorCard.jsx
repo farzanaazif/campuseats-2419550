@@ -1,26 +1,18 @@
-function VendorCard() {
-  const vendor = {
-    name: 'Kafe Mahallah Maryam',
-    location: 'Mahallah Maryam, Block F',
-    openHours: '8:00 am - 10:00 pm',
-    isOpen: true,
-  }
- 
+function VendorCard({ vendor, isSelected, onSelect }) {
   return (
-    <article className="card vendor-card">
-      <div className="thumb" aria-hidden="true">
-        {vendor.name.charAt(0)}
-      </div>
-      <div>
-        <h2>{vendor.name}</h2>
-        <p className="muted">{vendor.location}</p>
-        <p className="muted">Open: {vendor.openHours}</p>
-        <span className={vendor.isOpen ? 'status open' : 'status closed'}>
-          {vendor.isOpen ? 'Open now' : 'Closed'}
-        </span>
-      </div>
-    </article>
-  )
+    <button 
+      type="button" 
+      // If isSelected is true, add the word "selected" to the class name
+      className={`vendor-card ${isSelected ? 'selected' : ''}`}
+      onClick={() => onSelect(vendor.id)}
+    >
+      <h3>{vendor.name}</h3>
+      <p>{vendor.location}</p>
+      <p>{vendor.openHours}</p>
+      <span className={vendor.isOpen ? 'open' : 'closed'}>
+        {vendor.isOpen ? 'Open now' : 'Closed'}
+      </span>
+    </button>
+  );
 }
- 
-export default VendorCard
+export default VendorCard;
