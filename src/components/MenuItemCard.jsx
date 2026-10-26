@@ -1,8 +1,8 @@
 function MenuItemCard() {
   const item = {
-    name: 'Nasi Lemak Ayam',
-    description: 'Coconut rice, fried chicken, sambal, egg and peanuts',
-    price: 7.5,
+    name: 'Nasi Ayam Gepuk',
+    description: 'White rice, fried chicken, sambal, cabbages and cucumbers',
+    price: 6.00,
     available: true,
   }
  
