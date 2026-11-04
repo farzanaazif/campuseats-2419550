@@ -1,18 +1,29 @@
-function VendorCard({ vendor, isSelected, onSelect }) {
+function VendorCard() {
+  const vendor = {
+    name: "Kafe Mahallah Maryam",
+    location: "Mahallah Maryam, Block F",
+    openHours: "8:00 am - 10:00 pm",
+    isOpen: true, // true = open, false = closed
+  };
+
   return (
-    <button 
-      type="button" 
-      // If isSelected is true, add the word "selected" to the class name
-      className={`vendor-card ${isSelected ? 'selected' : ''}`}
-      onClick={() => onSelect(vendor.id)}
-    >
-      <h3>{vendor.name}</h3>
-      <p>{vendor.location}</p>
-      <p>{vendor.openHours}</p>
-      <span className={vendor.isOpen ? 'open' : 'closed'}>
-        {vendor.isOpen ? 'Open now' : 'Closed'}
-      </span>
-    </button>
+    <div className="vendor-card">
+      {/* first letter of the name, inside the thumb box */}
+      <div className="thumb">{vendor.name[0]}</div>
+
+      <div className="vendor-info">
+        <h3>{vendor.name}</h3>
+        <p>{vendor.location}</p>
+        <p>Open: {vendor.openHours}</p>
+
+        {/* ternary picks the class: "status open" or "status closed" */}
+        <span className={vendor.isOpen ? "status open" : "status closed"}>
+          {/* ternary picks the text: "Open now" or "Closed" */}
+          {vendor.isOpen ? "Open now" : "Closed"}
+        </span>
+      </div>
+    </div>
   );
 }
+
 export default VendorCard;
