@@ -1,7 +1,7 @@
-import MenuItemCard from './MenuItemCard';
+import MenuItemCard from './MenuItemCard'; // child component we repeat 
 
 function MenuList({ items, onAdd }) {
-  // If there are no items, show a message
+  // If there are no items/empty array, show a message 
   if (items.length === 0) {
     return <p>No items on this menu yet.</p>;
   }

@@ -1,13 +1,13 @@
-function VendorCard() {
-  const vendor = {
-    name: "Kafe Mahallah Maryam",
-    location: "Mahallah Maryam, Block F",
-    openHours: "8:00 am - 10:00 pm",
-    isOpen: true, // true = open, false = closed
-  };
-
+// Props arrive from App: vendor (one object), isSelected (true/false), onSelect (function)
+function VendorCard({ vendor, isSelected, onSelect }) {
   return (
-    <div className="vendor-card">
+    <button
+      type="button"
+      // adds "selected" only when this vendor is the chosen one
+      className={isSelected ? "vendor-card selected" : "vendor-card"}
+      // arrow function so onSelect runs on click, not while rendering
+      onClick={() => onSelect(vendor.id)}
+    >
       {/* first letter of the name, inside the thumb box */}
       <div className="thumb">{vendor.name[0]}</div>
 
@@ -22,7 +22,7 @@ function VendorCard() {
           {vendor.isOpen ? "Open now" : "Closed"}
         </span>
       </div>
-    </div>
+    </button>
   );
 }
 

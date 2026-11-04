@@ -1,7 +1,7 @@
 function MenuItemCard() {
   const item = {
     name: "Nasi Ayam Gepuk",
-    description: "Whiterice, fried chicken, sambal, cucumbers and cabbages",
+    description: "White rice, fried chicken, sambal, cucumbers and cabbages",
     price: 6.0,        // must be a number, not "7.50" in quotes
     available: true,   // false = sold out
   };
