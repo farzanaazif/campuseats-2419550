@@ -1,21 +1,45 @@
+// line = { item, qty }. The two functions come from App through CartPage.
 function CartItem({ line, onChangeQty, onRemove }) {
-  const { item, qty } = line;
+  const { item, qty } = line; // destructure so the JSX is shorter
+
   return (
-    <li className="cart-line">
+    <div className="cart-row">
+      {/* Left: name and price of one */}
       <div>
-        <p className="cart-name">{item.name}</p>
-        <p className="muted">RM {item.price.toFixed(2)} each</p>
+        <div className="cart-name">{item.name}</div>
+        <div className="muted small">RM {item.price.toFixed(2)} each</div>
       </div>
-      <div className="qty">
-        <button type="button" onClick={() => onChangeQty(item.id, -1)}>-</button>
-        <span>{qty}</span>
-        <button type="button" onClick={() => onChangeQty(item.id, 1)}>+</button>
+
+      {/* Right: minus, qty, plus, line total, remove */}
+      <div className="cart-controls">
+        <button
+          type="button"
+          className="qty-btn"
+          aria-label={`Decrease ${item.name}`}
+          onClick={() => onChangeQty(item.id, -1)}
+        >
+          −
+        </button>
+
+        <span className="qty">{qty}</span>
+
+        <button
+          type="button"
+          className="qty-btn"
+          aria-label={`Increase ${item.name}`}
+          onClick={() => onChangeQty(item.id, 1)}
+        >
+          +
+        </button>
+
+        <strong className="line-total">RM {(item.price * qty).toFixed(2)}</strong>
+
+        <button type="button" className="remove-btn" onClick={() => onRemove(item.id)}>
+          Remove
+        </button>
       </div>
-      <p className="line-total">RM {(item.price * qty).toFixed(2)}</p>
-      <button type="button" className="link danger" onClick={() => onRemove(item.id)}>
-        Remove
-      </button>
-    </li>
+    </div>
   );
 }
+
 export default CartItem;

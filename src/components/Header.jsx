@@ -1,16 +1,13 @@
-// props: cartCount comes from App (cart.length)
-function Header({ cartCount }) {
+function Header({ cartCount, onShowMenu, onShowCart }) {
   return (
     <header className="header">
       <h1 className="logo">CampusEats</h1>
       <nav className="nav">
-        <a href="#">Vendors</a>
-        <a href="#">My Orders</a>
-        <a href="#">
+        <button type="button" className="link" onClick={onShowMenu}>Vendors</button>
+        <button type="button" className="link cart" onClick={onShowCart}>
           Cart <span className="badge">{cartCount}</span>
-        </a>
+        </button>
       </nav>
     </header>
-  );
+  )
 }
-export default Header;

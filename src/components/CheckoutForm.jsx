@@ -1,57 +1,82 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const MAHALLAHS = ['Ali', 'Aminah', 'Faruq', 'Asiah', 'Bilal', 'Hafsa', 'Uthman', 'Zubair'];
+// Options for the dropdown. Edit to match your campus.
+const MAHALLAHS = [
+  "Mahallah Asma",
+  "Mahallah Aminah",
+  "Mahallah Hafsa",
+  "Mahallah Ruqayyah",
+  "Mahallah Zubair",
+  "Mahallah Ali",
+  "Mahallah Uthman",
+];
 
-function validate(values) {
-  const errors = {};
-  if (values.name.trim().length < 3) errors.name = 'Enter your name (at least 3 characters).';
-  if (!values.mahallah) errors.mahallah = 'Choose your mahallah.';
-  if (!values.pickupTime || values.pickupTime < '07:00' || values.pickupTime > '22:00') {
-    errors.pickupTime = 'Choose a pickup time between 07:00 and 22:00.';
-  }
-  return errors;
+// A plain function: takes the form values, returns one message per field.
+// "" means "no error" for that field.
+function validate({ name, mahallah, pickupTime }) {
+  return {
+    name: name.trim().length >= 3 ? "" : "Enter your name (at least 3 characters).",
+    mahallah: mahallah ? "" : "Choose your mahallah.",
+    pickupTime: pickupTime ? "" : "Choose a pickup time.",
+  };
 }
 
-function CheckoutForm({ onPlaceOrder }) {
-  const [values, setValues] = useState({ name: '', mahallah: '', pickupTime: '' });
-  const [errors, setErrors] = useState({});
+function CheckoutForm({ onSubmitOrder }) {
+  // CONTROLLED inputs: each value lives in state.
+  const [name, setName] = useState("");
+  const [mahallah, setMahallah] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setValues(prev => ({ ...prev, [name]: value }));
-  }
+  // Recalculated on every render, so messages update as the user types.
+  const errors = validate({ name, mahallah, pickupTime });
+  // Object.values gives the 3 messages; every() checks that all of them are "".
+  const isValid = Object.values(errors).every((msg) => msg === "");
 
-  function handleSubmit(e) {
-    e.preventDefault(); // Stop page reload
-    const found = validate(values);
-    setErrors(found);
-    
-    if (Object.keys(found).length === 0) {
-      onPlaceOrder(values); // Form is valid, send data up
-    }
+  function handleSubmit(event) {
+    event.preventDefault();  // stop the browser from reloading the page
+    if (!isValid) return;    // do nothing while any error exists
+    onSubmitOrder({ name: name.trim(), mahallah, pickupTime }); // send details to App
   }
 
   return (
-    <form className="card form" onSubmit={handleSubmit} noValidate>
+    // noValidate turns off the browser's own popups so OUR messages show
+    <form className="card checkout" onSubmit={handleSubmit} noValidate>
       <h3>Checkout</h3>
-      
+
       <label htmlFor="name">Name</label>
-      <input id="name" name="name" value={values.name} onChange={handleChange} />
+      <input
+        id="name"
+        type="text"
+        value={name}                              // value comes from state
+        onChange={(e) => setName(e.target.value)} // typing updates state
+      />
       {errors.name && <p className="field-error">{errors.name}</p>}
 
       <label htmlFor="mahallah">Mahallah</label>
-      <select id="mahallah" name="mahallah" value={values.mahallah} onChange={handleChange}>
-        <option value="">Select...</option>
-        {MAHALLAHS.map(m => <option key={m} value={m}>{m}</option>)}
+      <select
+        id="mahallah"
+        value={mahallah}
+        onChange={(e) => setMahallah(e.target.value)}
+      >
+        <option value="">Select…</option>
+        {MAHALLAHS.map((m) => (
+          <option key={m} value={m}>{m}</option>
+        ))}
       </select>
       {errors.mahallah && <p className="field-error">{errors.mahallah}</p>}
 
-      <label htmlFor="pickupTime">Pickup time</label>
-      <input type="time" id="pickupTime" name="pickupTime" value={values.pickupTime} onChange={handleChange} />
+      <label htmlFor="pickup">Pickup time</label>
+      <input
+        id="pickup"
+        type="time"
+        value={pickupTime}
+        onChange={(e) => setPickupTime(e.target.value)}
+      />
       {errors.pickupTime && <p className="field-error">{errors.pickupTime}</p>}
 
-      <button type="submit" className="btn">Place order</button>
+      <button type="submit" className="btn btn-full">Place order</button>
     </form>
   );
 }
+
 export default CheckoutForm;
