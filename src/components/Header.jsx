@@ -1,5 +1,5 @@
-function Header() {
-  const cartCount = 0;
+// props: cartCount comes from App (cart.length)
+function Header({ cartCount }) {
   return (
     <header className="header">
       <h1 className="logo">CampusEats</h1>

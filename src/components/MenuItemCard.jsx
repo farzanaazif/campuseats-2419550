@@ -1,15 +1,12 @@
-function MenuItemCard() {
-  const item = {
-    name: "Nasi Ayam Gepuk",
-    description: "White rice, fried chicken, sambal, cucumbers and cabbages",
-    price: 6.0,        // must be a number, not "7.50" in quotes
-    available: true,   // false = sold out
-  };
-
+// item = one menu item object, onAdd = function from App
+function MenuItemCard({ item, onAdd }) {
   return (
     <div className="menu-card">
       {/* first letter of the item name */}
       <div className="thumb">{item.name[0]}</div>
+
+      {/* NEW: category shown as a tag (Rice, Noodles, Drinks...) */}
+      <span className="tag">{item.category}</span>
 
       <h3>{item.name}</h3>
       <p className="desc">{item.description}</p>
@@ -18,7 +15,12 @@ function MenuItemCard() {
       <p className="price">RM {item.price.toFixed(2)}</p>
 
       {/* disabled when NOT available; ternary changes the text */}
-      <button className="btn" disabled={!item.available}>
+      <button
+        type="button"
+        className="btn"
+        disabled={!item.available}
+        onClick={() => onAdd(item)}
+      >
         {item.available ? "Add to cart" : "Sold out"}
       </button>
     </div>
