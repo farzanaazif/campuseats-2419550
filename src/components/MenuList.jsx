@@ -1,18 +1,18 @@
-import MenuItemCard from './MenuItemCard'; // child component we repeat 
+import MenuItemCard from "./MenuItemCard";
+import { useCart } from "../hooks/useCart";
 
-function MenuList({ items, onAdd }) {
-  // If there are no items/empty array, show a message 
-  if (items.length === 0) {
-    return <p>No items on this menu yet.</p>;
-  }
+// items = the list to show. The cart function comes from context, not props.
+function MenuList({ items }) {
+  const { addToCart } = useCart();
 
   return (
     <div className="grid">
-      {/* Map through the items and create a card for each. We MUST use the item.id as the key! */}
       {items.map((item) => (
-        <MenuItemCard key={item.id} item={item} onAdd={onAdd} />
+        // MenuItemCard keeps its Week 2/3 props: item and onAdd
+        <MenuItemCard key={item.id} item={item} onAdd={addToCart} />
       ))}
     </div>
   );
 }
+
 export default MenuList;
