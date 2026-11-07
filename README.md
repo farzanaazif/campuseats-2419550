@@ -17,4 +17,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 
 ## Credits
-Vendors 2-3 (shop data only) from matricnum1 and matricnum2.
+Vendors 2-3 (shop data only) from 2413042 and 2419290.
