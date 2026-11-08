@@ -47,4 +47,4 @@ Add a new section every week, before you tag. Did not use AI? Write "None" under
 - What I kept or changed:
 - I kept the CheckoutForm fix, which uses my real state variables (name, mahallah, pickupTime) and defines errors and isValid from validate().
 
-- One thing the AI got wrong: -
+- One thing the AI got wrong: Sometimes they confused with the page that I am talking about
