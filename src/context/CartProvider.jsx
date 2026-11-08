@@ -52,10 +52,15 @@ export function CartProvider({ children }) {
     setCart([]);
   }
 
+    // Remove one order by its id (keeps every order whose id is different)
+  function removeOrder(orderId) {
+    setOrders((prev) => prev.filter((order) => order.id !== orderId));
+  }
+
   // Everything the rest of the app is allowed to use.
   const value = {
     cart, orders, count, total,
-    addToCart, changeQty, removeFromCart, placeOrder,
+    addToCart, changeQty, removeFromCart, placeOrder, removeOrder,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

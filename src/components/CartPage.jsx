@@ -1,7 +1,7 @@
 import CartItem from "./CartItem";
 import CheckoutForm from "./CheckoutForm";
 
-function CartPage({ cart, onChangeQty, onRemove, onPlaceOrder }) {
+function CartPage({ cart = [], onChangeQty, onRemove, onPlaceOrder }) {
   // reduce walks the array and adds price x qty into "sum". 0 is the start value.
   const total = cart.reduce((sum, line) => sum + line.item.price * line.qty, 0);
 
